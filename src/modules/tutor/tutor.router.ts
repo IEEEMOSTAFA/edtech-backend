@@ -4,16 +4,15 @@ import { TutorController } from "./tutor.controller";
 
 const router = Router();
 
+// 🌍 Public
+router.get("/", TutorController.getAllTutors);
+router.get("/:id", TutorController.getTutorById);
+
+// 🔐 Tutor only
 router.put(
   "/profile",
   auth(UserRole.TUTOR),
-  TutorController.updateProfile
-);
-
-router.put(
-  "/availability",
-  auth(UserRole.TUTOR),
-  TutorController.updateAvailability
+  TutorController.updateTutorProfile
 );
 
 export const tutorRouter = router;

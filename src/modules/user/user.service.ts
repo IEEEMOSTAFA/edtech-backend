@@ -39,3 +39,7 @@ export const getAllUsers = async () => {
   });
 };
 
+export function createUser(body: any) {
+  throw new Error("Function not implemented.");
+}
+

@@ -6,9 +6,11 @@ import errorHandler from "./middlewares/globalErrorHandler";
 import router from "./routes/auth.extra";
 import authExtraRoutes from "./routes/auth.extra";
 import { bookingRouter } from "./modules/booking/booking.router";
-import { tutorRouter } from "./modules/tutor/tutor.router";
+// import { tutorRouter } from "./modules/tutor/tutor.router";
 import { adminRouter } from "./modules/admin/admin.router";
 import { categoryRouter } from "./modules/category/category.router";
+import { tutorRouter } from "./modules/tutor/tutor.router";
+// import { categoryRouter } from "./modules/category/category.router";
 
 
 
@@ -26,10 +28,10 @@ app.use(express.json());
 
 // ================= AUTH ROUTES =================
 app.all("/api/auth/*splat", toNodeHandler(auth));
-
 app.use("/api/auth", authExtraRoutes);
+
 // app.use("/api/bookings", bookingRouter);
-// app.use("/api/tutor", tutorRouter);
+app.use("/api/tutors", tutorRouter);
 // app.use("/api/admin", adminRouter);
 app.use("/api/categories", categoryRouter);
 
