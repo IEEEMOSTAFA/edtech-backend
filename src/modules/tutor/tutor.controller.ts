@@ -36,7 +36,7 @@ const setAvailability = async (req: Request, res: Response, next: NextFunction) 
 
 const getTutorAvailability = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await availabilityService.getTutorAvailability(req.params.id);
+    const result = await availabilityService.getTutorAvailability(req.params.id as string);
     res.json({ success: true, data: result });
   } catch (error) {
     next(error);
@@ -54,7 +54,7 @@ const getAllTutors = async (_req: Request, res: Response, next: NextFunction) =>
 
 const getTutorById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await tutorService.getTutorById(req.params.id);
+    const result = await tutorService.getTutorById(req.params.id as string);
     res.json({ success: true, data: result });
   } catch (error) {
     next(error);
