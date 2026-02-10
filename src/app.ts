@@ -11,6 +11,7 @@ import { adminRouter } from "./modules/admin/admin.router";
 import { categoryRouter } from "./modules/category/category.router";
 import { tutorRouter } from "./modules/tutor/tutor.router";
 import { bookingRouter } from "./modules/booking/booking.router";
+import { reviewRouter } from "./modules/review/review.router";
 // import { categoryRouter } from "./modules/category/category.router";
 
 
@@ -31,40 +32,6 @@ app.use(express.json());
 app.use("/api/auth", authExtraRoutes);
 app.all("/api/auth/*splat", toNodeHandler(auth));
 // Change Form:
-// app.all("/api/auth/:path(*)", toNodeHandler(auth));
-// // ✅ Custom route FIRST (exact path)
-// app.get("/api/auth", authExtraRoutes);
-
-// // ✅ BetterAuth handles EVERYTHING else
-// app.use("/api/auth", toNodeHandler(auth));
-
-// // ✅ Mount custom auth routes
-// app.use("/api/auth", authExtraRoutes);
-
-// // ✅ BetterAuth handles built-in auth routes
-// app.use("/api/auth", toNodeHandler(auth));
-
-// ✅ Custom auth routes (Express controlled)
-// app.use("/api/auth", authExtraRoutes);
-
-// // ✅ BetterAuth ONLY as catch-all
-// app.all("/api/auth/*", toNodeHandler(auth));
-
-
-// ================= AUTH ROUTES =================
-
-// // 🔥 Isolated custom route
-// app.get("/api/auth/me", authExtraRoutes);
-
-// // 🔥 BetterAuth only for its own endpoints
-// app.all("/api/auth/*", toNodeHandler(auth));
-
-
-// ✅ Custom auth routes
-// app.use("/api/auth", authExtraRoutes);
-
-// // ✅ BetterAuth ONLY as catch-all
-// app.all("/api/auth/*", toNodeHandler(auth));
 
 
 
@@ -73,6 +40,7 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 // app.use("/api/bookings", bookingRouter);
 app.use("/api/tutors", tutorRouter);
 app.use("/api/bookings", bookingRouter);
+app.use("/api/reviews", reviewRouter);
 // app.use("/api/admin", adminRouter);
 app.use("/api/categories", categoryRouter);
 

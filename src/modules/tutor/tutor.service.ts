@@ -9,9 +9,21 @@ const getAllTutors = async () => {
   });
 };
 
-const getTutorById = async (id: string) => {
+// const getTutorById = async (id: string) => {
+//   return prisma.tutorProfile.findUnique({
+//     where: { id },
+//     include: {
+//       user: true,
+//       categories: true,
+//       reviews: true,
+//     },
+//   });
+// };
+
+
+const getTutorById = async (userId: string) => {
   return prisma.tutorProfile.findUnique({
-    where: { id },
+    where: { userId },
     include: {
       user: true,
       categories: true,
@@ -19,6 +31,11 @@ const getTutorById = async (id: string) => {
     },
   });
 };
+
+
+
+
+
 
 const upsertTutorProfile = async (
   userId: string,
