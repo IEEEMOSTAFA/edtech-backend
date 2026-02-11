@@ -46,13 +46,6 @@ app.use("/api/categories", categoryRouter);
 
 
 
-
-
-
-
-
-
-
 // ================= HEALTH CHECK =================
 app.get("/", (req, res) => {
   res.send("SkillBridge API is running 🚀");

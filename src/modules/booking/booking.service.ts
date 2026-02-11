@@ -86,9 +86,39 @@ const getBookingById = async (id: string) => {
   });
 };
 
+// booking.service.ts (add this)
+const completeBooking = async (bookingId: string, tutorId: string) => {
+  const booking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+  });
+
+  if (!booking) {
+    throw new Error("Booking not found");
+  }
+
+  // 🔐 Tutor ownership check
+  if (booking.tutorId !== tutorId) {
+    throw new Error("This booking is not yours");
+  }
+
+  if (booking.status !== BookingStatus.CONFIRMED) {
+    throw new Error("Booking cannot be completed");
+  }
+
+  return prisma.booking.update({
+    where: { id: bookingId },
+    data: { status: BookingStatus.COMPLETED },
+  });
+};
+
+
+
+
+
 // 🔥 IMPORTANT EXPORT
 export const bookingService = {
   createBooking,
   getMyBookings,
   getBookingById,
+  completeBooking
 };

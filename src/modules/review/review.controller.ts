@@ -10,7 +10,7 @@ const createReview = async (
         const user = req.user;
         const { bookingId, rating, comment } = req.body;
 
-        // User Check
+        // Check if user exists
         if (!user) {
             return res.status(401).json({
                 success: false,

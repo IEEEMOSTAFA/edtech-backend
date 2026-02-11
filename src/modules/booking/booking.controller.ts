@@ -49,8 +49,43 @@ const getBookingById = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
+const completeBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const tutorId = req.user?.id;
+    const role = req.user?.role;
+    const bookingId = req.params.id;
+
+    if (!tutorId || role !== "TUTOR") {
+      return res.status(403).json({
+        success: false,
+        message: "Only tutors can complete bookings",
+      });
+    }
+
+    const result = await bookingService.completeBooking(bookingId, tutorId);
+
+    res.json({
+      success: true,
+      message: "Booking marked as completed",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+
+
+
 export const BookingController = {
   createBooking,
   getMyBookings,
   getBookingById,
+  completeBooking 
 };

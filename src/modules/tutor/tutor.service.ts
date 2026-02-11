@@ -81,10 +81,43 @@ const upsertTutorProfile = async (
   });
 };
 
+
+
+
+const getTutorDashboard = async (tutorId: string) => {
+  return prisma.user.findUnique({
+    where: { id: tutorId },
+    include: {
+      bookingsAsTutor: {
+        include: {
+          student: true,
+          review: true,
+        },
+        orderBy: {
+          sessionDate: "desc",
+        },
+      },
+      tutorProfile: {
+        include: {
+          reviews: {
+            include: {
+              student: true,
+            },
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+        },
+      },
+    },
+  });
+};
+
 export const tutorService = {
   getAllTutors,
   getTutorById,
   upsertTutorProfile,
+  getTutorDashboard
 };
 
 
