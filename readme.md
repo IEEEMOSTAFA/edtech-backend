@@ -1,7 +1,7 @@
 migration: npx prisma migrate dev
 generate: npx prisma generate
 
-
+>> main server:  npx tsx src/server.ts
 
 
 
@@ -9,10 +9,10 @@ generate: npx prisma generate
 
 prompt: 
 
-test it in postman + then done another+give step by step as beginer friendly + if anything need clarify me i will sharre you
+test it in postman + then done another+give step by step as beginer friendly + if anything need clarify me i will share you
 
 
->> main server:  npx tsx src/server.ts
+
 >> seedAdmin Running: npx tsx src/scripts/seedAdmin.ts  
 
 >>  if any need clarify me i 
