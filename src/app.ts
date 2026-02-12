@@ -16,9 +16,64 @@ import { studentRouter } from "./modules/student/student.router";
 
 
 
+// const app: Application = express();
+
+// // ================= MIDDLEWARE =================
+// app.use(
+//   cors({
+//     origin: process.env.APP_URL,
+//     credentials: true,
+//   })
+// );
+
+// app.use(express.json());
+
+// // ================= AUTH ROUTES =================
+// app.use("/api/auth", authExtraRoutes);
+// app.all("/api/auth/*splat", toNodeHandler(auth));
+// // Change Form:
+
+
+
+// // ================= FEATURE ROUTES =================
+// app.use("/api/admin", adminRouter);
+// // app.use("/api/bookings", bookingRouter);
+// app.use("/api/tutors", tutorRouter);
+// app.use("/api/bookings", bookingRouter);
+// app.use("/api/reviews", reviewRouter);
+// // app.use("/api/admin", adminRouter);
+// app.use("/api/categories", categoryRouter);
+// app.use("/api/dashboard", studentRouter);
+
+
+
+// // ================= HEALTH CHECK =================
+// app.get("/", (req, res) => {
+//   res.send("SkillBridge API is running 🚀");
+// });
+
+// // ================= ERROR HANDLER =================
+// app.use(errorHandler);
+
+// export default app;
+
+
+
+
+
+
+
+
+
+
+
+// New correction::
+
+
+
 const app: Application = express();
 
-// ================= MIDDLEWARE =================
+// ================= CORS =================
 app.use(
   cors({
     origin: process.env.APP_URL,
@@ -26,26 +81,22 @@ app.use(
   })
 );
 
-app.use(express.json());
-
-// ================= AUTH ROUTES =================
+// ================= AUTH ROUTES FIRST =================
+// ⚠️ Important: better-auth এর আগে express.json() ব্যবহার করবো না
 app.use("/api/auth", authExtraRoutes);
 app.all("/api/auth/*splat", toNodeHandler(auth));
-// Change Form:
 
-
+// ================= BODY PARSER AFTER AUTH =================
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ================= FEATURE ROUTES =================
 app.use("/api/admin", adminRouter);
-// app.use("/api/bookings", bookingRouter);
 app.use("/api/tutors", tutorRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/reviews", reviewRouter);
-// app.use("/api/admin", adminRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/dashboard", studentRouter);
-
-
 
 // ================= HEALTH CHECK =================
 app.get("/", (req, res) => {
@@ -56,8 +107,6 @@ app.get("/", (req, res) => {
 app.use(errorHandler);
 
 export default app;
-
-
 
 
 

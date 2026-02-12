@@ -72,6 +72,8 @@ const getTutorDashboard = async (
 ) => {
   try {
     console.log("User:", req.user);
+    console.log("Headers:", req.headers);
+
     const tutorId = req.user?.id;
 
     if (!tutorId) {
