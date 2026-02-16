@@ -48,7 +48,7 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
-    sendVerificationEmail: async ({ user,url, token }) => {
+    sendVerificationEmail: async ({ user, url, token }) => {
       const verifyUrl = `${process.env.APP_URL}/verify-email?token=${token}`;
 
       await transporter.sendMail({
@@ -77,15 +77,17 @@ export const auth = betterAuth({
 
 
 
-   socialProviders: {
-        google: { 
-             
-            clientId: process.env.GOOGLE_CLIENT_ID as string, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            accessType: "offline",
-            prompt: "select_account consent",  
-        }, 
+  socialProviders: {
+    google: {
+
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      accessType: "offline",
+      prompt: "select_account consent",
+      // 🆕 Add redirect URL
+      // redirectURI: `${process.env.APP_URL}/auth/callback`,
     },
+  },
 
 });
 
