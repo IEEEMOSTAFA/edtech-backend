@@ -5,12 +5,12 @@ import auth, { UserRole } from "../../middlewares/auth";
 const router = Router();
 
 
-// 📊 Admin Dashboard
+//  Admin Dashboard
 router.get("/", auth(UserRole.ADMIN), AdminController.getDashboard);
 console.log("Admin router loaded");
 
 
-// 🛡️ Admin only routes
+//  Admin only routes
 router.get("/users", auth(UserRole.ADMIN), AdminController.getUsers);
 
 router.patch(

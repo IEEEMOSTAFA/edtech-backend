@@ -5,7 +5,7 @@ import { BookingController } from "./booking.controller";
 
 const router = Router();
 
-// 🔐 Student & Tutor
+// Student & Tutor
 router.post("/", auth(), BookingController.createBooking);
 
 router.get("/", auth(), BookingController.getMyBookings);

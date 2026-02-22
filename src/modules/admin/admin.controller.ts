@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { adminService } from "./admin.service";
 
-// 👤 GET /api/admin/users
+// GET /api/admin/users
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await adminService.getAllUsers();
@@ -15,7 +15,7 @@ const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// 🔒 PATCH /api/admin/users/:id
+//  PATCH /api/admin/users/:id
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
@@ -31,7 +31,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// 📅 GET /api/admin/bookings
+// GET /api/admin/bookings
 const getBookings = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await adminService.getAllBookings();
@@ -45,7 +45,7 @@ const getBookings = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// 📚 POST /api/admin/categories
+// POST /api/admin/categories
 const createCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, description, icon } = req.body;
@@ -73,7 +73,7 @@ const createCategory = async (req: Request, res: Response, next: NextFunction) =
 };
 
 
-// 📊 GET /api/admin
+//  GET /api/admin
 const getDashboard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await adminService.getDashboardStats();

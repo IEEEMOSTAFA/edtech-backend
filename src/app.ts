@@ -39,7 +39,7 @@ app.use(
 );
 
 // ================= AUTH ROUTES FIRST =================
-// ⚠️ Important: better-auth এর আগে express.json() ব্যবহার করবো না
+// 
 app.use("/api/auth", authExtraRoutes);
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
@@ -57,7 +57,7 @@ app.use("/api/dashboard", studentRouter);
 
 // ================= HEALTH CHECK =================
 app.get("/", (req, res) => {
-  res.send("SkillBridge API is running 🚀");
+  res.send("SkillBridge API is running ");
 });
 
 // ================= ERROR HANDLER =================

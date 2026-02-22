@@ -2,7 +2,7 @@
 
 import { prisma } from "../../lib/prisma";
 
-// 📊 Student Dashboard Overview
+//  Student Dashboard Overview
 const getStudentDashboard = async (userId: string) => {
   const totalBookings = await prisma.booking.count({
     where: { studentId: userId },
@@ -21,7 +21,7 @@ const getStudentDashboard = async (userId: string) => {
   };
 };
 
-// 📅 Student Booking History
+//  Student Booking History
 const getMyBookings = async (userId: string) => {
   return await prisma.booking.findMany({
     where: { studentId: userId },
@@ -39,7 +39,7 @@ const getMyBookings = async (userId: string) => {
   });
 };
 
-// 👤 Student Profile
+//  Student Profile
 const getMyProfile = async (userId: string) => {
   return await prisma.user.findUnique({
     where: { id: userId },
@@ -53,7 +53,7 @@ const getMyProfile = async (userId: string) => {
   });
 };
 
-// ✏️ Update Student Profile
+//  Update Student Profile
 const updateMyProfile = async (
   userId: string,
   data: { name?: string; image?: string }

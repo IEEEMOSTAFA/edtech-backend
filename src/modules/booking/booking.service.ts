@@ -1,7 +1,7 @@
-// src/modules/booking/booking.service.ts
+
 import { BookingStatus } from "../../../generated/prisma";
 import { prisma } from "../../lib/prisma";
-// import { BookingStatus } from "@prisma/client";
+
 
 const createBooking = async (
   studentId: string,
@@ -24,7 +24,7 @@ const createBooking = async (
     throw new Error("Tutor profile not found");
   }
 
-  // const sessionDay = new Date(data.sessionDate).getDay();
+  
   const jsDay = new Date(data.sessionDate).getDay(); // 0=Sunday
   const sessionDay = jsDay === 0 ? 6 : jsDay - 1;    // 0=Monday
   const availability = await prisma.availability.findFirst({
@@ -55,7 +55,7 @@ const createBooking = async (
   });
 };
 
-// ✅ STUDENT / TUTOR bookings
+//  STUDENT / TUTOR bookings
 const getMyBookings = async (userId: string, role: string) => {
   if (role === "STUDENT") {
     return prisma.booking.findMany({
@@ -84,7 +84,7 @@ const getMyBookings = async (userId: string, role: string) => {
   return [];
 };
 
-// ✅ Single booking
+// Single booking
 const getBookingById = async (id: string) => {
   return prisma.booking.findUnique({
     where: { id },
@@ -124,7 +124,7 @@ const completeBooking = async (bookingId: string, tutorId: string) => {
 
 
 
-// 🔥 IMPORTANT EXPORT
+//  EXPORT
 export const bookingService = {
   createBooking,
   getMyBookings,

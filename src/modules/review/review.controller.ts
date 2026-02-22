@@ -18,7 +18,7 @@ const createReview = async (
             });
         }
 
-        // ✅ Only STUDENT
+        //  Only STUDENT
         if (user.role !== "STUDENT") {
             return res.status(403).json({
                 success: false,
@@ -40,7 +40,7 @@ const createReview = async (
             });
         }
 
-        // 🔍 Find booking
+        //  Find booking
         const booking = await reviewService.findBookingForReview(bookingId);
 
         if (!booking) {
@@ -50,7 +50,7 @@ const createReview = async (
             });
         }
 
-        // 🔐 Ownership check
+        //  Ownership check
         if (booking.studentId !== user.id) {
             return res.status(403).json({
                 success: false,
@@ -58,7 +58,7 @@ const createReview = async (
             });
         }
 
-        // ⏳ Must be COMPLETED
+        //  Must be COMPLETED
         if (booking.status !== "COMPLETED") {
             return res.status(400).json({
                 success: false,
@@ -66,7 +66,7 @@ const createReview = async (
             });
         }
 
-        // 🚫 One review per booking
+        //  One review per booking
         const existingReview =
             await reviewService.checkExistingReview(bookingId);
 
@@ -86,7 +86,7 @@ const createReview = async (
             });
         }
 
-        // ✍️ Create review
+        //  Create review
         const result = await reviewService.createReview({
             bookingId,
             tutorId: tutorProfile.id, // ⚠️ TutorProfile.id
@@ -95,7 +95,7 @@ const createReview = async (
             comment,
         });
 
-        // ⭐ Update tutor rating
+        //  Update tutor rating
         await reviewService.updateTutorRating(tutorProfile.id, rating);
 
         res.status(201).json({
@@ -108,57 +108,6 @@ const createReview = async (
 };
 
 
-
-
-
-// const updateReview = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const user = req.user;
-//     const { id } = req.params;         // review ID (URL থেকে)
-//     const { rating, comment } = req.body;
-
-//     if (!user) {
-//       return res.status(401).json({ success: false, message: "Unauthorized" });
-//     }
-
-//     // শুধু STUDENT update করতে পারবে
-//     if (user.role !== "STUDENT") {
-//       return res.status(403).json({
-//         success: false,
-//         message: "Only students can update reviews",
-//       });
-//     }
-
-//     if (rating && (rating < 1 || rating > 5)) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Rating must be between 1 and 5",
-//       });
-//     }
-
-//     const updated = await reviewService.updateReview(id as string, user.id, {
-//       rating,
-//       comment,
-//     });
-
-//     // null মানে review নেই অথবা অন্যের review
-//     if (!updated) {
-//       return res.status(404).json({
-//         success: false,
-//         message: "Review not found or you don't have permission",
-//       });
-//     }
-
-//     res.json({ success: true, data: updated });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-// review.controller.ts এ যোগ করো
 const updateReview = async (
   req: Request,
   res: Response,
@@ -205,10 +154,7 @@ const updateReview = async (
   }
 };
 
-// export const ReviewController = {
-//   createReview,
-//   updateReview,  // ← যোগ করো
-// };
+
 const getReview = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user;

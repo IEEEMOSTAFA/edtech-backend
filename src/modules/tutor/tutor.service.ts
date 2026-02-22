@@ -10,18 +10,6 @@ const getAllTutors = async () => {
 };
 
 
-// const getTutorById = async (userId: string) => {
-//   return prisma.tutorProfile.findUnique({
-//     where: { userId },
-//     include: {
-//       user: true,
-//       categories: true,
-//       reviews: true,
-//     },
-//   });
-// };
-
-
 
 const getTutorById = async (userId: string) => {
   return prisma.tutorProfile.findUnique({

@@ -4,14 +4,14 @@ import { TutorController } from "./tutor.controller";
 
 const router = Router();
 
-// 🌍 Public
+//  Public
 router.get("/", TutorController.getAllTutors);
-// 🔐 Tutor Dashboard
+//  Tutor Dashboard
 router.get("/dashboard",auth(UserRole.TUTOR),TutorController.getTutorDashboard);
 router.get("/:id", TutorController.getTutorById);
 router.get("/:id/availability", TutorController.getTutorAvailability);
 
-// 🔐 Tutor
+//  Tutor
 router.put("/profile", auth(UserRole.TUTOR), TutorController.updateTutorProfile);
 router.put("/availability", auth(UserRole.TUTOR), TutorController.setAvailability);
 
@@ -22,7 +22,7 @@ router.put("/availability", auth(UserRole.TUTOR), TutorController.setAvailabilit
 
 export const tutorRouter = router;
 
-// auth(UserRole.TUTOR),
+
 
 
 

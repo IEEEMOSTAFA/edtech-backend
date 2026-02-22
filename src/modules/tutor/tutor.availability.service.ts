@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma";
 
-// 🔐 Tutor availability update
+//  Tutor availability update
 const updateAvailability = async (
   tutorId: string,
   slots: {
@@ -15,7 +15,7 @@ const updateAvailability = async (
     where: { tutorId },
   });
 
-  // 2️⃣ নতুন availability যোগ করি
+  //  availability add: 
   return prisma.availability.createMany({
     data: slots.map((slot) => ({
       tutorId,
@@ -27,7 +27,7 @@ const updateAvailability = async (
   });
 };
 
-// 🌍 Public: Tutor availability দেখার জন্য
+//  Public: Tutor availability
 const getTutorAvailability = async (tutorId: string) => {
   return prisma.availability.findMany({
     where: {

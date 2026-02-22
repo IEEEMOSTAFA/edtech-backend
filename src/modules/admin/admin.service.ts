@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma";
 
-// 👤 Get all users
+//  Get all users
 const getAllUsers = async () => {
   return await prisma.user.findMany({
     orderBy: {
@@ -18,7 +18,7 @@ const getAllUsers = async () => {
   });
 };
 
-// 🔒 Ban / Unban user
+// Ban / Unban user
 const updateUserStatus = async (
   id: string,
   data: { isBanned?: boolean; isActive?: boolean }
@@ -29,7 +29,7 @@ const updateUserStatus = async (
   });
 };
 
-// 📅 Get all bookings
+// Get all bookings
 const getAllBookings = async () => {
   return await prisma.booking.findMany({
     include: {
@@ -46,7 +46,7 @@ const getAllBookings = async () => {
   });
 };
 
-// 📚 Create category (Admin only)
+// Create category (Admin only)
 const createCategory = async (data: {
   name: string;
   description?: string;
@@ -58,7 +58,7 @@ const createCategory = async (data: {
 };
 
 
-// 📊 Admin Dashboard Stats
+//  Admin Dashboard 
 const getDashboardStats = async () => {
   const totalUsers = await prisma.user.count();
 
