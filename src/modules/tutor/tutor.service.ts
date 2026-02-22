@@ -10,17 +10,41 @@ const getAllTutors = async () => {
 };
 
 
+// const getTutorById = async (userId: string) => {
+//   return prisma.tutorProfile.findUnique({
+//     where: { userId },
+//     include: {
+//       user: true,
+//       categories: true,
+//       reviews: true,
+//     },
+//   });
+// };
+
+
+
 const getTutorById = async (userId: string) => {
   return prisma.tutorProfile.findUnique({
     where: { userId },
     include: {
       user: true,
       categories: true,
-      reviews: true,
+      reviews: {
+      
+        include: {
+          student: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
+          },
+        },
+        orderBy: { createdAt: "desc" },
+      },
     },
   });
 };
-
 
 
 
@@ -33,6 +57,7 @@ const upsertTutorProfile = async (
     hourlyRate: number;
     experience: number;
     categoryIds?: string[];
+    image?: string | null;
   }
 ) => {
   const baseData = {
@@ -40,6 +65,15 @@ const upsertTutorProfile = async (
     hourlyRate: data.hourlyRate,
     experience: data.experience,
   };
+
+
+
+  if (data.image !== undefined) {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { image: data.image },
+    });
+  }
 
   if (data.categoryIds && data.categoryIds.length > 0) {
     return prisma.tutorProfile.upsert({

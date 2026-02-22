@@ -66,7 +66,7 @@ const completeBooking = async (
       });
     }
 
-    const result = await bookingService.completeBooking(bookingId, tutorId);
+    const result = await bookingService.completeBooking(bookingId as string, tutorId);
 
     res.json({
       success: true,

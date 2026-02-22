@@ -84,8 +84,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       accessType: "offline",
       prompt: "select_account consent",
-      // 🆕 Add redirect URL
-      // redirectURI: `${process.env.APP_URL}/auth/callback`,
+      
     },
   },
 

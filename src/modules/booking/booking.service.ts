@@ -24,8 +24,9 @@ const createBooking = async (
     throw new Error("Tutor profile not found");
   }
 
-  const sessionDay = new Date(data.sessionDate).getDay();
-
+  // const sessionDay = new Date(data.sessionDate).getDay();
+  const jsDay = new Date(data.sessionDate).getDay(); // 0=Sunday
+  const sessionDay = jsDay === 0 ? 6 : jsDay - 1;    // 0=Monday
   const availability = await prisma.availability.findFirst({
     where: {
       tutorId: data.tutorId,
@@ -59,7 +60,15 @@ const getMyBookings = async (userId: string, role: string) => {
   if (role === "STUDENT") {
     return prisma.booking.findMany({
       where: { studentId: userId },
-      include: { tutor: true },
+      include: { tutor: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        review: true,
+       },
       orderBy: { createdAt: "desc" },
     });
   }

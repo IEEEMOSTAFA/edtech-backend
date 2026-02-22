@@ -27,8 +27,13 @@ const getMyBookings = async (userId: string) => {
     where: { studentId: userId },
     include: {
       tutor: {
-        select: { name: true, email: true },
+        select: { 
+          id: true,
+          name: true,
+          email: true 
+        },
       },
+      review:true
     },
     orderBy: { createdAt: "desc" },
   });

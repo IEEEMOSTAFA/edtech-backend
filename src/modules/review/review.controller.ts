@@ -107,6 +107,132 @@ const createReview = async (
     }
 };
 
+
+
+
+
+// const updateReview = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const user = req.user;
+//     const { id } = req.params;         // review ID (URL থেকে)
+//     const { rating, comment } = req.body;
+
+//     if (!user) {
+//       return res.status(401).json({ success: false, message: "Unauthorized" });
+//     }
+
+//     // শুধু STUDENT update করতে পারবে
+//     if (user.role !== "STUDENT") {
+//       return res.status(403).json({
+//         success: false,
+//         message: "Only students can update reviews",
+//       });
+//     }
+
+//     if (rating && (rating < 1 || rating > 5)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Rating must be between 1 and 5",
+//       });
+//     }
+
+//     const updated = await reviewService.updateReview(id as string, user.id, {
+//       rating,
+//       comment,
+//     });
+
+//     // null মানে review নেই অথবা অন্যের review
+//     if (!updated) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Review not found or you don't have permission",
+//       });
+//     }
+
+//     res.json({ success: true, data: updated });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+// review.controller.ts এ যোগ করো
+const updateReview = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = req.user;
+    const { id } = req.params;
+    const { rating, comment } = req.body;
+
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    if (user.role !== "STUDENT") {
+      return res.status(403).json({
+        success: false,
+        message: "Only students can update reviews",
+      });
+    }
+
+    if (rating && (rating < 1 || rating > 5)) {
+      return res.status(400).json({
+        success: false,
+        message: "Rating must be between 1 and 5",
+      });
+    }
+
+    const updated = await reviewService.updateReview(id as string, user.id, {
+      rating,
+      comment,
+    });
+
+    if (!updated) {
+      return res.status(404).json({
+        success: false,
+        message: "Review not found or you don't have permission",
+      });
+    }
+
+    res.json({ success: true, data: updated });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// export const ReviewController = {
+//   createReview,
+//   updateReview,  // ← যোগ করো
+// };
+const getReview = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user;
+    const { id } = req.params;
+
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const review = await reviewService.getReviewById(id as string, user.id);
+
+    if (!review) {
+      return res.status(404).json({ success: false, message: "Review not found" });
+    }
+
+    res.json({ success: true, data: review });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export const ReviewController = {
     createReview,
+    updateReview,
+    getReview
 };

@@ -3,7 +3,7 @@ generate: npx prisma generate
 
 >> main server:  npx tsx src/server.ts
 
-
+>> seedAdmin Running: npx tsx src/scripts/seedAdmin.ts 
 
 
 
@@ -13,7 +13,7 @@ test it in postman + then done another+give step by step as beginer friendly + i
 
 
 
->> seedAdmin Running: npx tsx src/scripts/seedAdmin.ts  
+ 
 
 >>  if any need clarify me i 
 
@@ -51,3 +51,24 @@ will share you:
                 message: "Unauthorized: User not found",
             });
         }
+
+
+
+
+
+
+
+
+
+>>  ```
+1. Student books    → status: CONFIRMED
+                    → BookingCard: কোনো review button নেই
+
+2. Tutor completes  → status: COMPLETED  
+                    → BookingCard: "Give Review" button দেখায়
+
+3. Student reviews  → review create হয়
+                    → BookingCard: stars + "Edit Review" দেখায়
+
+4. Student edits    → review update হয়
+                    → tutor rating recalculate হয়        
