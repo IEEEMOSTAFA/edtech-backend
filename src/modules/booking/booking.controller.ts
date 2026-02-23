@@ -1,4 +1,4 @@
-// src/modules/booking/booking.controller.ts
+
 import { Request, Response, NextFunction } from "express";
 import { bookingService } from "./booking.service";
 
@@ -78,6 +78,35 @@ const completeBooking = async (
   }
 };
 
+// 🆕 Cancel booking — Student only
+const cancelBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const studentId = req.user?.id;
+    const role = req.user?.role;
+    const bookingId = req.params.id;
+
+    if (!studentId || role !== "STUDENT") {
+      return res.status(403).json({
+        success: false,
+        message: "Only students can cancel bookings",
+      });
+    }
+
+    const result = await bookingService.cancelBooking(bookingId as string, studentId);
+
+    res.json({
+      success: true,
+      message: "Booking cancelled successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 
@@ -87,5 +116,6 @@ export const BookingController = {
   createBooking,
   getMyBookings,
   getBookingById,
-  completeBooking 
+  completeBooking ,
+  cancelBooking
 };

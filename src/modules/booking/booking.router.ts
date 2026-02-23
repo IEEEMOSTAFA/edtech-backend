@@ -1,4 +1,4 @@
-// src/modules/booking/booking.router.ts
+
 import { Router } from "express";
 import auth from "../../middlewares/auth";
 import { BookingController } from "./booking.controller";
@@ -16,5 +16,6 @@ router.patch(
   auth(),
   BookingController.completeBooking
 );
+router.patch("/:id/cancel", auth(), BookingController.cancelBooking);
 
 export const bookingRouter = router;

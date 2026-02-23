@@ -19,15 +19,6 @@ import { studentRouter } from "./modules/student/student.router";
 
 
 
-
-
-
-
-
-// New correction::
-
-
-
 const app: Application = express();
 
 // ================= CORS =================
