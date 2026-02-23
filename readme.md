@@ -7,36 +7,54 @@ generate: npx prisma generate
 
 
 
-prompt: 
 
-test it in postman + then done another+give step by step as beginer friendly + if anything need clarify me i will share you
+ Project Structure: 
+edtech-backend/
+├── src/
+│   ├── app.ts                    # Express app config (middlewares, routes)
+│   ├── server.ts                 # Server entry point
+│
+│   ├── lib/
+│   │   ├── prisma.ts             # Prisma client instance
+│   │   ├── auth.ts               # Better-auth config
+│   │   └── auth-handler.ts       # Auth handlers
+│
+│   ├── middlewares/
+│   │   ├── auth.ts               # Authentication middleware
+│   │   ├── globalErrorHandler.ts # Global error handler
+│   │   └── notFound.ts           # 404 handler
+│
+│   ├── modules/
+│   │   ├── admin/
+│   │   │   ├── admin.controller.ts
+│   │   │   ├── admin.service.ts
+│   │   │   └── admin.router.ts
+│   │   │
+│   │   ├── booking/
+│   │   ├── category/
+│   │   ├── review/
+│   │   ├── student/
+│   │   └── tutor/
+│   │       ├── tutor.controller.ts
+│   │       ├── tutor.service.ts
+│   │       ├── tutor.availability.service.ts
+│   │       └── tutor.router.ts
+│
+│   ├── routes/
+│   │   └── auth.extra.ts         # Extra auth routes
+│
+│   └── scripts/
+│       └── seedAdmin.ts          # Admin seed script
+│
+├── prisma/
+│   └── schema.prisma             # Prisma schema
+│
+├── .env                          # Environment variables (NOT committed)
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
 
-
-
- 
-
->>  if any need clarify me i 
-
-will share you:
-
->> why this error + how to solve + explain bangla
->> Admin data:
-
- email: "muna@gmail.com",
-      password: "muna1234",
-
-
-
->> Tutor Step:
-
-1️⃣ Tutor Register
-2️⃣ Tutor Login
-3️⃣ Tutor Profile Create / Update
-4️⃣ Tutor Availability Set
-5️⃣ Browse Tutors (Public)
-6️⃣ Tutor Details + Availability
-7️⃣ Tutor Dashboard (Bookings / Sessions)
-8️⃣ Ratings & Reviews দেখা
 
 
 
