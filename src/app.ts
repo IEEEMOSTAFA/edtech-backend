@@ -32,7 +32,8 @@ app.use(
 // ================= AUTH ROUTES FIRST =================
 // 
 app.use("/api/auth", authExtraRoutes);
-app.all("/api/auth/*splat", toNodeHandler(auth));
+// app.all("/api/auth/*splat", toNodeHandler(auth));
+app.all("/api/auth/*", toNodeHandler(auth));
 
 // ================= BODY PARSER AFTER AUTH =================
 app.use(express.json());
