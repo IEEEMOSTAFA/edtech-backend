@@ -22,12 +22,32 @@ import { studentRouter } from "./modules/student/student.router";
 const app: Application = express();
 
 // ================= CORS =================
+// app.use(
+//   cors({
+//     origin: process.env.APP_URL || true,
+//     credentials: true,
+//   })
+// );
+
+
+
+
+
+
+
+// Updated::
+
 app.use(
   cors({
-    origin: process.env.APP_URL || true,
+    origin: [
+      "https://edtech-frontend-flax.vercel.app",
+      "http://localhost:3000"
+    ],
     credentials: true,
   })
 );
+
+
 
 // ================= AUTH ROUTES FIRST =================
 // 
